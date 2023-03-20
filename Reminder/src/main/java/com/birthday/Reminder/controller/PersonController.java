@@ -19,6 +19,7 @@ public class PersonController {
 	@Autowired
 	private PersonRepository personRepository;
 	
+	
 	@PostMapping("/person")
 	public Person addPerson(@RequestBody Person person) {
 		return personRepository.save(person);
@@ -35,5 +36,21 @@ public class PersonController {
 
 		return ResponseEntity.ok().body( personRepository.findById(id).orElseThrow());
 	}
+	
+	@GetMapping("/test")
+	public String testResponse() {
+
+		return "Response Hard Coded!";
+	}
+	
+	
+
+	@GetMapping("/test/{name}")
+	public String testResponseForPath(@PathVariable("name") String pathName) {
+
+		return String.format("%s%s", "Response from path param ",pathName);
+				
+	}
+	
 
 }
